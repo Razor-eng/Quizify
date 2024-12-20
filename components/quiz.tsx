@@ -5,13 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { quizTopics } from '@/lib/quiz-data';
 import { ArrowLeft } from 'lucide-react';
-import { ThemeToggle } from '@/components/theme-toggle';
 import { getRandomQuestions } from '@/lib/utils/quiz';
 import { Question } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { QuizAnswersModal } from './quiz-answers-modal';
 import { QuizProgress } from './quiz-progress';
-import { ConfettiExplosion } from './confetti-explosion';
 
 interface QuizProps {
   topicId: string;
@@ -84,7 +82,6 @@ export function Quiz({ topicId, onBack }: QuizProps) {
 
   if (showResults) {
     const correctAnswers = answers.filter((a) => a.correct).length;
-    const showConfetti = correctAnswers >= 3;
 
     return (
       <Card className="max-w-2xl w-full mx-auto">
@@ -98,8 +95,6 @@ export function Quiz({ topicId, onBack }: QuizProps) {
               You answered {correctAnswers} out of {questions.length} correctly
             </p>
           </div>
-
-          {showConfetti && <ConfettiExplosion />}
 
           <QuizAnswersModal answers={answers} />
 
